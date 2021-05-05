@@ -5,6 +5,7 @@ img {
   max-width: 100%;
 }
 
+/* style on base.html */
 header h1 {
   margin: 1rem;
   padding: 0.5rem;
@@ -20,11 +21,12 @@ body h2 {
   height: 10vw;
 }
 
-.wrapper {
+.content {
   max-width: 100%;
   padding: 0 5%;
 }
 
+/* style on index.html */
 .input-list {
   display: flex;
   font-size: 1rem;
@@ -42,13 +44,13 @@ body h2 {
 .input-list a:hover {
   color: #08d;
 }
+
 .nav-logo {
   text-align: center;
   height: 50px;
 }
 
-
-/* style on summary table */
+/* style on medicine.html */
 .table-field {
   margin-left: 5%;
   margin-right: 5%;
@@ -75,7 +77,6 @@ body h2 {
   top: 0;
 }
 .summary-table th,
-.summary-table tr,
 .summary-table td {
   text-align: center;
   border-left: 1px solid #fff;

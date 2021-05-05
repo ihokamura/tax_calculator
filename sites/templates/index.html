@@ -1,27 +1,41 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>TaxCalc</title>
-    <meta name="description" content="年末調整の税金計算アプリ" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  </head>
+{% extends 'base.html' %}
 
-  <body>
-    <header class="wrapper">
-      <h1><a href="index.html"><img class="logo" src="{{ url_for('static', filename='images/tax.png') }}" alt="Tax Calculatorホーム"></a></h1>
-      <h1>年末調整の税金計算アプリ</h1>
-    </header>
-    
-    <div class="wrapper">
-      <h2>入力</h2>
-      <div>
-        <ul class="input-list">
-          <li><a href="medicine.html"><img class="nav-logo" src="{{ url_for('static', filename='images/medicine.png') }}" alt="病院"><br>医療</a></li>
-          <li><a href="summary.html"><img class="nav-logo" src="{{ url_for('static', filename='images/donation.png') }}" alt="募金箱"><br>寄付</a></li>
-          <li><a href="summary.html"><img class="nav-logo" src="{{ url_for('static', filename='images/investment.png') }}" alt="株式チャート"><br>投資</a></li>
-        </ul>
-      </div>
-    </div>
-  </body>
-</html>
+{% block title %}
+Home
+{% endblock %}
+
+{% block content%}
+<h2>入力</h2>
+<ul class="input-list">
+  <li>
+    <a href="medicine.html">
+      <img
+        class="nav-logo"
+        src="{{ url_for('static', filename='images/medicine.png') }}"
+        alt="病院"
+      />
+      <br />医療
+    </a>
+  </li>
+  <li>
+    <a href="summary.html">
+      <img
+        class="nav-logo"
+        src="{{ url_for('static', filename='images/donation.png') }}"
+        alt="募金箱"
+      />
+      <br />寄付
+    </a>
+  </li>
+  <li>
+    <a href="summary.html">
+      <img
+        class="nav-logo"
+        src="{{ url_for('static', filename='images/investment.png') }}"
+        alt="株式チャート"
+      />
+      <br />投資
+    </a>
+  </li>
+</ul>
+{% endblock %}

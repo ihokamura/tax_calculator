@@ -229,7 +229,7 @@ function makeDeleteButton() {
   let input = document.createElement("input");
   input.type = "image";
   input.src = "/static/images/trash.png";
-  input.alt = "削除";
+  input.alt = "削除ボタン";
   input.className = "delete-button";
   input.addEventListener(
     "click",
