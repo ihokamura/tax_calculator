@@ -4,31 +4,55 @@
     <meta charset="utf-8" />
     <title>TaxCalc</title>
     <meta name="description" content="年末調整の税金計算アプリ" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='images/tax.png') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
 
   <body>
     <header class="wrapper">
-      <h1><a href="index.html"><img class="logo" src="{{ url_for('static', filename='images/tax.png') }}" alt="Tax Calculatorホーム"></a></h1>
+      <h1>
+        <a href="index.html"
+          ><img
+            class="logo"
+            src="{{ url_for('static', filename='images/tax.png') }}"
+            alt="Tax Calculatorホーム"
+        /></a>
+      </h1>
       <h1>年末調整の税金計算アプリ</h1>
     </header>
 
     <section class="wrapper table-field">
-      <select id="year-select">
-      </select>
+      <select id="year-select"></select>
       <label for="year-select">年</label>
-      <table id="summary-table-medicine" class="summary-table">
-        <tr>
-          <th class="table-data-date">日付</th>
-          <th class="table-data-name">支払先</th>
-          <th class="table-data-amount">金額</th>
-          <th class="table-data-operations"></th>
-        </tr>
-      </table>
-      <p class="table-row-addition"><button id="add-button">追加</button></p>
-      <form>
-        <input id="update-button" type="submit" value="更新">
-      </form>
+      <div class="summary-table-wrap">
+        <table id="summary-table-medicine" class="summary-table">
+          <thead>
+            <tr>
+              <th class="table-data-date">日付</th>
+              <th class="table-data-name">支払先</th>
+              <th class="table-data-amount">金額</th>
+              <th class="table-data-operations"></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="table-bottom">
+        <input id="update-button" type="submit" value="更新" />
+        <input
+          id="add-button"
+          type="image"
+          src="{{ url_for('static', filename='images/plus.png') }}"
+          alt="追加"
+        />
+      </p>
     </section>
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
   </body>

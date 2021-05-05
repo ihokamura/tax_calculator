@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 
 DATA_DIRECTORY = 'sites/static/data/'
+BOOK_FILE_PATH = DATA_DIRECTORY + 'book.csv'
 STATUS_OK = 200
 
 
@@ -22,7 +23,7 @@ def medicine():
 
 @app.route('/book', methods=['GET', 'POST'])
 def get_book():
-    with open(DATA_DIRECTORY + 'book.csv', 'r', encoding='utf-8') as csvfile:
+    with open(BOOK_FILE_PATH, 'r', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         dicts = list(line for line in reader)
     return jsonify(dicts), STATUS_OK
@@ -50,7 +51,7 @@ def get_text(path):
 @app.route('/update', methods=['POST'])
 def update_entries():
     members = ('index', 'date', 'name', 'amount')
-    with open(DATA_DIRECTORY + 'book.csv', 'w', encoding='utf-8') as csvfile:
+    with open(BOOK_FILE_PATH, 'w', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(members)
         for entry in request.json:

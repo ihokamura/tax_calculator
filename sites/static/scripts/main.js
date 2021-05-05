@@ -230,7 +230,7 @@ function makeDeleteButton() {
   input.type = "image";
   input.src = "/static/images/trash.png";
   input.alt = "削除";
-  input.className = "table-row-deletion";
+  input.className = "delete-button";
   input.addEventListener(
     "click",
     function () {
