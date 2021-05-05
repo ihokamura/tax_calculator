@@ -1,0 +1,101 @@
+@charset "utf-8";
+
+img {
+  max-width: 100%;
+}
+
+header h1 {
+  background-color: #4bd;
+  margin: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+body h2 {
+  border-bottom-color: gray;
+  border-bottom-style: solid;
+}
+
+.logo {
+  height: 100px;
+  margin-top: 10px;
+}
+
+.wrapper {
+  max-width: 1000px;
+  padding: 0 5%;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+}
+.input-list {
+  display: flex;
+  font-size: 1rem;
+  margin-top: 25px;
+  list-style: none;
+}
+.input-list li {
+  margin: 20px;
+  width: 60px;
+  text-align: center;
+}
+.input-list a {
+  color: #000;
+}
+.input-list a:hover {
+  color: #08d;
+}
+.nav-logo {
+  text-align: center;
+  height: 50px;
+}
+
+.summary-table {
+  background-color: #dddddd;
+  border-spacing: 0px;
+  height: auto;
+  margin: 1rem 0% 1rem 0%;
+  width: 100%;
+}
+.summary-table tr th,
+td {
+  text-align: center;
+  padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+  border: thin solid #08b;
+}
+
+.table-field {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.table-row-deletion {
+  height: 1rem;
+  width: 1rem;
+}
+.table-row-deletion:hover {
+  cursor: pointer;
+  opacity: 50%;
+}
+
+.table-row-addition {
+  text-align: right;
+}
+
+.table-data-index {
+  width: 10%;
+}
+.table-data-date {
+  width: 20%;
+}
+.table-data-name {
+  width: 40%;
+}
+.table-data-amount {
+  width: 20%;
+}
+.table-data-operations {
+  width: 10%;
+}
