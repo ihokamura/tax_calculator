@@ -15,16 +15,23 @@ Medicine
           <th class="table-data-date">日付</th>
           <th class="table-data-name">支払先</th>
           <th class="table-data-amount">金額</th>
-          <th class="table-data-operations"></th>
+          <th class="table-data-deletion"></th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
   </div>
   <p class="table-bottom">
-    <input id="update-button" type="submit" value="更新" />
+    <input
+      id="update-button"
+      class="custom-button"
+      type="image"
+      src="{{ url_for('static', filename='images/update.png') }}"
+      alt="更新ボタン" 
+    />
     <input
       id="add-button"
+      class="custom-button"
       type="image"
       src="{{ url_for('static', filename='images/plus.png') }}"
       alt="追加ボタン"
@@ -34,5 +41,6 @@ Medicine
 {% endblock %}
 
 {% block script %}
+<script src="{{ url_for('static', filename='scripts/medicine_common.js') }}"></script>
 <script src="{{ url_for('static', filename='scripts/medicine_input.js') }}"></script>
 {% endblock %}

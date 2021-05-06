@@ -1,15 +1,15 @@
-let BOOK_ENTRIES;
-let PAYMENT_SELECT;
+const TODAY = convertDateToIsoFormat(new Date());
+const TABLE_DATA_INDEX_PREFIX = "table-data-index";
+
+let BOOK_ENTRIES = Array();
+let PAYMENT_SELECTOR = document.createElement("select");
 let TABLE_BODY = document.getElementById("table-medicine-input").tBodies[0];
-let TABLE_DATA_INDEX_PREFIX = "table-data-index";
-let TODAY = convertDateToIsoFormat(new Date());
-let SERVER_URL = "http://localhost:5000/";
 let YEAR_SELECTOR = document.getElementById("year-select");
 
 
 getBookEntries();
-getYearList();
-getPaymentList();
+setYearsSelector(YEAR_SELECTOR);
+setPaymentSelector(PAYMENT_SELECTOR);
 
 
 document.addEventListener(
@@ -23,8 +23,10 @@ document.addEventListener(
         let name = "";
         let amount = 0;
         let entry = { index: index, date: date, name: name, amount: amount };
+        let row = makeTableRow(entry);
+
         BOOK_ENTRIES.push(entry);
-        TABLE_BODY.appendChild(makeTableRow(entry));
+        TABLE_BODY.appendChild(row);
       },
       false
     );
@@ -62,12 +64,12 @@ document.addEventListener(
     YEAR_SELECTOR.addEventListener(
       "input",
       function () {
-        let book = BOOK_ENTRIES.filter(
+        let entries = BOOK_ENTRIES.filter(
           function (data) {
             let year = data.date.split("-")[0];
             return year == YEAR_SELECTOR.value;
           });
-        resetTable(book);
+        resetTable(entries, TABLE_BODY);
       },
       false
     );
@@ -87,26 +89,7 @@ function getBookEntries() {
 }
 
 
-function getYearList() {
-  let request = new XMLHttpRequest();
-  let url = SERVER_URL + "years";
-  request.open("get", url, true);
-  request.send();
-  request.onload = function () {
-    let fragment = document.createDocumentFragment();
-    let years = request.responseText.split("\n");
-    for (year of years) {
-      let option = document.createElement("option");
-      option.value = year;
-      option.textContent = year;
-      fragment.appendChild(option);
-    }
-    YEAR_SELECTOR.appendChild(fragment);
-  };
-}
-
-
-function getPaymentList() {
+function setPaymentSelector(select) {
   let request = new XMLHttpRequest();
   let url = SERVER_URL + "payments";
   request.open("get", url, true);
@@ -120,33 +103,8 @@ function getPaymentList() {
       option.textContent = payment;
       fragment.appendChild(option);
     }
-    PAYMENT_SELECT = document.createElement("select");
-    PAYMENT_SELECT.appendChild(fragment);
+    select.appendChild(fragment);
   };
-}
-
-
-function resetTable(book) {
-  destroyTable();
-  createTable(book);
-}
-
-
-function createTable(book) {
-  let fragment = document.createDocumentFragment();
-  for (entry of book) {
-    let row = makeTableRow(entry);
-    fragment.appendChild(row);
-  }
-  TABLE_BODY.appendChild(fragment);
-}
-
-
-function destroyTable() {
-  // leave header and following text
-  while (TABLE_BODY.childNodes.length > 2) {
-    TABLE_BODY.childNodes[TABLE_BODY.childNodes.length - 1].remove();
-  }
 }
 
 
@@ -173,7 +131,7 @@ function makeTdDate(date) {
 
 
 function makeTdName(name) {
-  let input = PAYMENT_SELECT.cloneNode(true);
+  let input = PAYMENT_SELECTOR.cloneNode(true);
   input.value = name;
   input.addEventListener(
     "input",
@@ -214,12 +172,12 @@ function makeTdAmount(amount) {
 }
 
 
-function makeTdOperations() {
-  let button = makeDeleteButton();
+function makeTdDeletion() {
+  let input = makeDeleteButton();
 
   let td = document.createElement("td");
-  td.className = "table-data-operations";
-  td.appendChild(button);
+  td.className = "table-data-deletion";
+  td.appendChild(input);
 
   return td;
 }
@@ -230,7 +188,7 @@ function makeDeleteButton() {
   input.type = "image";
   input.src = "/static/images/trash.png";
   input.alt = "削除ボタン";
-  input.className = "delete-button";
+  input.className = "delete-button custom-button";
   input.addEventListener(
     "click",
     function () {
@@ -253,7 +211,7 @@ function makeDeleteButton() {
 
 function makeTableRow(entry) {
   let fragment = document.createDocumentFragment();
-  let tds = [makeTdDate(entry.date), makeTdName(entry.name), makeTdAmount(entry.amount), makeTdOperations()];
+  let tds = [makeTdDate(entry.date), makeTdName(entry.name), makeTdAmount(entry.amount), makeTdDeletion()];
   for (td of tds) {
     fragment.appendChild(td);
   };
