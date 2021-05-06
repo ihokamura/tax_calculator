@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Medicine
+{% endblock %}
+
+{% block content %}
+<div class="table-field">
+  <select id="year-select"></select>
+  <label for="year-select">年</label>
+  <div class="table-wrap">
+    <table id="table-medicine-summary" class="table-medicine">
+      <thead>
+        <tr>
+          <th class="table-data-name">支払先</th>
+          <th class="table-data-amount">金額</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='scripts/medicine_summary.js') }}"></script>
+{% endblock %}

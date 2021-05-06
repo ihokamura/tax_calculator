@@ -8,8 +8,8 @@ Medicine
 <div class="table-field">
   <select id="year-select"></select>
   <label for="year-select">年</label>
-  <div class="summary-table-wrap">
-    <table id="summary-table-medicine" class="summary-table">
+  <div class="table-wrap">
+    <table id="table-medicine-input" class="table-medicine">
       <thead>
         <tr>
           <th class="table-data-date">日付</th>
@@ -34,5 +34,5 @@ Medicine
 {% endblock %}
 
 {% block script %}
-<script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/medicine_input.js') }}"></script>
 {% endblock %}

@@ -1,6 +1,6 @@
 let BOOK_ENTRIES;
 let PAYMENT_SELECT;
-let TABLE_BODY = document.getElementById("summary-table-medicine").tBodies[0];
+let TABLE_BODY = document.getElementById("table-medicine-input").tBodies[0];
 let TABLE_DATA_INDEX_PREFIX = "table-data-index";
 let TODAY = convertDateToIsoFormat(new Date());
 let SERVER_URL = "http://localhost:5000/";

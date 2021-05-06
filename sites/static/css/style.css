@@ -50,13 +50,13 @@ body h2 {
   height: 50px;
 }
 
-/* style on medicine.html */
+/* common style on table */
 .table-field {
   margin-left: 5%;
   margin-right: 5%;
 }
 
-.summary-table-wrap {
+.table-wrap {
   padding-right: 10px;
   max-height: 50vw;
   overflow: auto;
@@ -64,7 +64,7 @@ body h2 {
   overflow-y: scroll;
 }
 
-.summary-table {
+.table-medicine {
   background-color: #fff;
   border-collapse: collapse;
   margin: 0 auto;
@@ -72,56 +72,63 @@ body h2 {
   width: 100%;
   table-layout: fixed;
 }
-.summary-table thead tr th {
+.table-medicine thead tr th {
   position: sticky;
   top: 0;
 }
-.summary-table th,
-.summary-table td {
-  text-align: center;
+.table-medicine th,
+.table-medicine td {
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
 }
-.summary-table th {
+.table-medicine th {
   background-color: #bbb;
 }
-.summary-table tr:nth-child(odd) {
+.table-medicine tr:nth-child(odd) {
   background-color: #eee;
 }
 
-.table-data-date {
+/* style on medicine-input.html */
+#table-medicine-input .table-data-date {
   width: 150px;
+  text-align: center;
 }
-.table-data-date input {
+#table-medicine-input .table-data-date input {
   width: 100%;
   box-sizing: border-box;
   background: transparent;
   border: none;
 }
-.table-data-date input::-webkit-calendar-picker-indicator {
+#table-medicine-input
+  .table-data-date
+  input::-webkit-calendar-picker-indicator {
   opacity: 0;
 }
-.table-data-date input::-webkit-calendar-picker-indicator:hover {
+#table-medicine-input
+  .table-data-date
+  input::-webkit-calendar-picker-indicator:hover {
   opacity: 100;
 }
 
-.table-data-name {
+#table-medicine-input .table-data-name {
   width: 275px;
+  text-align: center;
 }
-.table-data-name select {
+#table-medicine-input .table-data-name select {
   width: 90%;
   background: transparent;
   border: none;
   -webkit-appearance: none;
 }
-.table-data-name select:hover {
+#table-medicine-input .table-data-name select:hover {
   -webkit-appearance: auto;
 }
 
-.table-data-amount {
+#table-medicine-input .table-data-amount {
   width: 100px;
+  text-align: center;
 }
-.table-data-amount input {
+#table-medicine-input .table-data-amount input {
   width: 90%;
   box-sizing: border-box;
   background: transparent;
@@ -129,8 +136,9 @@ body h2 {
   text-align: right;
 }
 
-.table-data-operations {
+#table-medicine-input .table-data-operations {
   width: 25px;
+  text-align: center;
 }
 
 .delete-button {
@@ -147,6 +155,10 @@ body h2 {
   justify-content: space-between;
 }
 
+#update-button {
+  width: 75px;
+}
+
 #add-button {
   height: 25px;
   width: 25px;
@@ -156,6 +168,21 @@ body h2 {
   opacity: 50%;
 }
 
-#update-button {
-  width: 75px;
+/* style on medicine-summary.html */
+#table-medicine-summary .table-data-name {
+  width: 250px;
+}
+
+#table-medicine-summary .table-data-amount {
+  width: 100px;
+}
+
+#table-medicine-summary tbody .table-data-name {
+  text-align: left;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+}
+
+#table-medicine-summary tbody .table-data-amount {
+  text-align: right;
+  padding: 0.2rem 1rem 0.2rem 1rem;
 }
