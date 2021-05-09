@@ -23,6 +23,9 @@ function setYearsSelector(select) {
 function resetTable(entries, table) {
   destroyTable(table);
   createTable(entries, table);
+
+  let wrap = table.parentNode.parentNode;
+  wrap.scrollTop = 0;
 }
 
 

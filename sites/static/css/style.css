@@ -99,14 +99,18 @@ body h2 {
   text-align: center;
 }
 #table-medicine-input .table-data-date input {
-  width: 100%;
+  width: 90%;
   box-sizing: border-box;
   background: transparent;
   border: none;
 }
+#table-medicine-input .table-data-date input::-webkit-datetime-edit {
+  text-align: center;
+}
 #table-medicine-input
   .table-data-date
   input::-webkit-calendar-picker-indicator {
+  padding: 0;
   opacity: 0;
 }
 #table-medicine-input
@@ -154,6 +158,7 @@ body h2 {
 .table-bottom {
   display: flex;
   justify-content: space-between;
+  padding: 0 1rem 0 1rem;
 }
 
 #add-button,

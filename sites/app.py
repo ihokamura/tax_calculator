@@ -14,22 +14,22 @@ YEARS_FILE_PATH = DATA_DIRECTORY + 'years.txt'
 STATUS_OK = 200
 
 
-@app.route('/index.html', methods=['GET', 'POST'])
+@app.route('/index.html', methods=['GET'])
 def index():
     return render_template('index.html')
 
 
-@app.route('/medicine-input.html', methods=['GET', 'POST'])
+@app.route('/medicine-input.html', methods=['GET'])
 def medicine_input():
     return render_template('medicine-input.html')
 
 
-@app.route('/medicine-summary.html', methods=['GET', 'POST'])
+@app.route('/medicine-summary.html', methods=['GET'])
 def medicine_summary():
     return render_template('medicine-summary.html')
 
 
-@app.route('/book', methods=['GET', 'POST'])
+@app.route('/book-input', methods=['GET'])
 def get_book():
     with open(BOOK_FILE_PATH, 'r', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -37,7 +37,7 @@ def get_book():
     return jsonify(dicts), STATUS_OK
 
 
-@app.route('/book-summary', methods=['GET', 'POST'])
+@app.route('/book-summary', methods=['GET'])
 def get_book_summary():
     with open(BOOK_FILE_PATH, 'r', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
@@ -88,7 +88,7 @@ def update_entries():
         writer = csv.writer(csvfile)
         writer.writerow(members)
         for entry in request.json:
-            if entry['date'] != '':
+            if (entry['date'] != '') and (entry['name'] != '') and (entry['amount'] != 0):
                 writer.writerow(entry[member] for member in members)
 
     return '', STATUS_OK

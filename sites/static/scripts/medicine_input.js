@@ -27,6 +27,10 @@ document.addEventListener(
 
         BOOK_ENTRIES.push(entry);
         TABLE_BODY.appendChild(row);
+
+        let wrap = TABLE_BODY.parentNode.parentNode;
+        wrap.scrollTop = wrap.scrollHeight;
+        window.scrollBy(0, row.clientHeight);
       },
       false
     );
@@ -41,14 +45,14 @@ document.addEventListener(
     document.getElementById("update-button").addEventListener(
       "click",
       function () {
-        //let confirm = window.confirm("支払情報を更新しますか?");
-        let confirm = true;
+        let confirm = window.confirm("支払情報を更新しますか?");
         if (confirm) {
           let request = new XMLHttpRequest();
           let url = SERVER_URL + "update";
           request.open("POST", url);
           request.setRequestHeader("Content-Type", "application/json");
           request.send(JSON.stringify(BOOK_ENTRIES));
+          resetTableEntries();
         }
       },
       false
@@ -64,12 +68,7 @@ document.addEventListener(
     YEAR_SELECTOR.addEventListener(
       "input",
       function () {
-        let entries = BOOK_ENTRIES.filter(
-          function (data) {
-            let year = data.date.split("-")[0];
-            return year == YEAR_SELECTOR.value;
-          });
-        resetTable(entries, TABLE_BODY);
+        resetTableEntries();
       },
       false
     );
@@ -80,7 +79,7 @@ document.addEventListener(
 
 function getBookEntries() {
   let request = new XMLHttpRequest();
-  let url = SERVER_URL + "book";
+  let url = SERVER_URL + "book-input";
   request.open("GET", url, true);
   request.send();
   request.onload = function () {
@@ -192,8 +191,7 @@ function makeDeleteButton() {
   input.addEventListener(
     "click",
     function () {
-      //let confirm = window.confirm("支払情報を削除しますか?");
-      let confirm = true;
+      let confirm = window.confirm("支払情報を削除しますか?");
       if (confirm) {
         let index = getIndexOfEntry(input);
         BOOK_ENTRIES.splice(index, 1);
@@ -240,4 +238,17 @@ function getRowNodeOfEntry(input) {
 
 function getIndexOfEntry(input) {
   return Number(getRowNodeOfEntry(input).id.replace(TABLE_DATA_INDEX_PREFIX, ""));
+}
+
+
+function resetTableEntries() {
+  let entries = BOOK_ENTRIES.filter(
+    function (data) {
+      let year = data.date.split("-")[0];
+      let name = data.name;
+      let amount = data.amount;
+      return (year === YEAR_SELECTOR.value) && (name !== '') && (amount !== 0);
+    });
+
+  resetTable(entries, TABLE_BODY);
 }

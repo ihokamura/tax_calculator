@@ -15,7 +15,7 @@ document.addEventListener(
       function () {
         let entries = BOOK_SUMMARY.filter(
           function (data) {
-            return data.year == YEAR_SELECTOR.value;
+            return data.year === YEAR_SELECTOR.value;
           });
         resetTable(entries, TABLE_BODY);
       },
