@@ -1,17 +1,14 @@
 import csv
-import json
 from itertools import product
 
 from flask import Flask, jsonify, render_template, request
 
-app = Flask(__name__)
-
-
-DATA_DIRECTORY = 'sites/static/data/'
-BOOK_FILE_PATH = DATA_DIRECTORY + 'book.csv'
-PAYMENTS_FILE_PATH = DATA_DIRECTORY + 'payments.txt'
-YEARS_FILE_PATH = DATA_DIRECTORY + 'years.txt'
 STATUS_OK = 200
+app = Flask(__name__)
+app.DATA_DIRECTORY = 'sites/static/data/'
+app.BOOK_FILE_PATH = app.DATA_DIRECTORY + 'book.csv'
+app.PAYMENTS_FILE_PATH = app.DATA_DIRECTORY + 'payments.txt'
+app.YEARS_FILE_PATH = app.DATA_DIRECTORY + 'years.txt'
 
 
 @app.route('/index.html', methods=['GET'])
@@ -31,7 +28,7 @@ def medicine_summary():
 
 @app.route('/book-input', methods=['GET'])
 def get_book():
-    with open(BOOK_FILE_PATH, 'r', encoding='utf-8') as csvfile:
+    with open(app.BOOK_FILE_PATH, 'r', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile)
         dicts = list(line for line in reader)
     return jsonify(dicts), STATUS_OK
@@ -39,13 +36,13 @@ def get_book():
 
 @app.route('/book-summary', methods=['GET'])
 def get_book_summary():
-    with open(BOOK_FILE_PATH, 'r', encoding='utf-8') as csvfile:
+    with open(app.BOOK_FILE_PATH, 'r', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
         next(reader)
         entries = list(line for line in reader)
 
-    years = get_text(YEARS_FILE_PATH).split('\n')[1:]
-    payments = get_text(PAYMENTS_FILE_PATH).split('\n')[1:]
+    years = get_text(app.YEARS_FILE_PATH).split('\n')[1:]
+    payments = get_text(app.PAYMENTS_FILE_PATH).split('\n')[1:]
     summary = list()
     for year, payment in product(years, payments):
         def get_year_from_entry(entry):
@@ -64,13 +61,13 @@ def get_book_summary():
 
 @app.route('/years', methods=['GET'])
 def get_years():
-    years = get_text(YEARS_FILE_PATH)
+    years = get_text(app.YEARS_FILE_PATH)
     return years, STATUS_OK
 
 
 @app.route('/payments', methods=['GET'])
 def get_payments():
-    payments = get_text(PAYMENTS_FILE_PATH)
+    payments = get_text(app.PAYMENTS_FILE_PATH)
     return payments, STATUS_OK
 
 
@@ -84,7 +81,7 @@ def get_text(path):
 @app.route('/update', methods=['POST'])
 def update_entries():
     members = ('index', 'date', 'name', 'amount')
-    with open(BOOK_FILE_PATH, 'w', encoding='utf-8') as csvfile:
+    with open(app.BOOK_FILE_PATH, 'w', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(members)
         for entry in request.json:
