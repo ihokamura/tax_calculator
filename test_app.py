@@ -17,6 +17,33 @@ def set_app_property():
     return set_func
 
 
+def test_get_book(set_app_property):
+    set_app_property(book_file_name='book.csv')
+    result = client.get('/book-input')
+    test_data = [
+        {'index': '0', 'date': '2020-01-01', 'name': 'テスト1', 'amount': '1000'},
+        {'index': '1', 'date': '2021-01-02', 'name': 'テスト2', 'amount': '2000'},
+        {'index': '2', 'date': '2022-01-03', 'name': 'テスト3', 'amount': '3000'},
+    ]
+
+    assert json.loads(result.data.decode()) == json.loads(
+        json.dumps(test_data))
+    assert result.status == '200 OK'
+
+
+def test_get_book_summary(set_app_property):
+    set_app_property(book_file_name='book_test_summary.csv')
+    result = client.get('/book-summary')
+    test_data = [
+        {'amount': 2000, 'name': 'テスト1', 'year': '2020'},
+        {'amount': 2000, 'name': 'テスト2', 'year': '2020'},
+    ]
+
+    assert json.loads(result.data.decode()) == json.loads(
+        json.dumps(test_data))
+    assert result.status == '200 OK'
+
+
 def test_get_years(set_app_property):
     set_app_property()
     result = client.get('/years')
@@ -45,17 +72,4 @@ def test_update_entries(set_app_property):
     result = client.post('/update', data=json.dumps(test_data),
                          content_type='application/json')
 
-    assert result.status == '200 OK'
-
-
-def test_get_book_summary(set_app_property):
-    set_app_property(book_file_name='book_test_summary.csv')
-    result = client.get('/book-summary')
-    test_data = [
-        {'amount': 2000, 'name': 'テスト1', 'year': '2020'},
-        {'amount': 2000, 'name': 'テスト2', 'year': '2020'},
-    ]
-
-    assert json.loads(result.data.decode()) == json.loads(
-        json.dumps(test_data))
     assert result.status == '200 OK'
